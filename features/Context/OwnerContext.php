@@ -12,15 +12,16 @@ class OwnerContext extends RawMinkContext
      */
     public function zeJestemZalogowanyJakoWlascicielStrony()
     {
-        throw new PendingException();
+        $this->getSession()->getPage()->fillField('Login', 'admin');
+        $this->getSession()->getPage()->fillField('Hasło', 'foo');
     }
 
     /**
-     * @Given /^że jestem na stronie produktów$/
+     * @Given /^że jestem na stronie zarządzania produktami$/
      */
     public function zeJestemNaStronieProduktow()
     {
-        throw new PendingException();
+        $this->getSession()->visit($this->locatePath('/admin/produkty'));
     }
 
     /**
@@ -28,23 +29,25 @@ class OwnerContext extends RawMinkContext
      */
     public function nieJestemZalogowany()
     {
-        throw new PendingException();
+        $this->assertSession()->pageTextNotContains('Zalogowany jako "admin"');
     }
 
     /**
      * @Given /^wypełniam pole "([^"]*)" wartością "([^"]*)"$/
      */
-    public function wypelniamPoleWartoscia($arg1, $arg2)
+    public function wypelniamPoleWartoscia($label, $value)
     {
-        throw new PendingException();
+        $this->getSession()->getPage()->fillField($label, $value);
+        
     }
 
     /**
-     * @Given /^wysyłam formularz$/
+     * @Given /^klikam przycisk "([^"]*)"$/
      */
-    public function wysylamFormularz()
+    public function klikamPrzycisk($label)
     {
-        throw new PendingException();
+        $this->getSession()->getPage()->pressButton($label);
+        
     }
 
     /**
