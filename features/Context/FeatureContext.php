@@ -29,4 +29,12 @@ class FeatureContext extends MinkContext
         $this->parameters = $parameters;
     }
 
+
+    /**
+     * @Given /^że jestem zalogowany jako właściciel strony$/
+     */
+    public function zeJestemZalogowanyJakoWlascicielStrony()
+    {
+        throw new PendingException();
+    }
 }
