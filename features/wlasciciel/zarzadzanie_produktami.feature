@@ -1,5 +1,6 @@
 # language: pl
 
+@wip
 Właściwość: Jako właściciel strony
     chciałbym zarządzać produktami  
     które się na niej pojawiają

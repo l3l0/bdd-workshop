@@ -55,7 +55,7 @@ class OwnerContext extends RawMinkContext
      */
     public function powinnaPojawicSieListaProduktowKtoreMogeEdytowac()
     {
-        throw new PendingException();
+        $this->assertSession()->pageTextContains('Lista produktów');
     }
 
     /**
@@ -63,14 +63,14 @@ class OwnerContext extends RawMinkContext
      */
     public function niePowinnaPojawicSieListaProduktowKtoreMogeEdytowac()
     {
-        throw new PendingException();
+        $this->assertSession()->pageTextNotContains('Lista produktów');
     }
 
     /**
      * @Given /^powinen pojawić się błąd "([^"]*)"$/
      */
-    public function powinenPojawicSieBlad($arg1)
+    public function powinenPojawicSieBlad($error)
     {
-        throw new PendingException();
+        $this->assertSession()->elementTextContains('css', '.error', $error);
     }
 }
