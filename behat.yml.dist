@@ -1,0 +1,14 @@
+default:
+    filters:
+        tags: "~@wip"
+    formatter:
+        name: progress
+    paths:
+        features: features
+    context:
+        class:  Context\FeatureContext
+    extensions:
+        Behat\MinkExtension\Extension:
+            goutte: ~
+            default_session: goutte
+            base_url: 'localhost:8000'
