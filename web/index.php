@@ -1,8 +1,9 @@
 <?php
 
-use Silex\Provider\SecurityServiceProvider;
 use Symfony\Component\HttpFoundation\Request;
+use Silex\Provider\SecurityServiceProvider;
 use Silex\Provider\SessionServiceProvider;
+use Silex\Provider\TwigServiceProvider;
 
 require_once __DIR__.'/../vendor/autoload.php'; 
 
@@ -25,26 +26,17 @@ $app->register(
         ]             
     ]
 );
+$app->register(new TwigServiceProvider, [
+    'twig.path' => __DIR__.'/../views'
+]);
 
 $app->get('/login', function(Request $request) use($app) {
     $error = $app['security.last_error']($request);
 
-    $response = '';
-    if ($error) {
-        $response = '<div class="error">Podałeś zły login lub hasło</div>';
-    }
-    $response .= <<<LOGIN
-<form method="POST" action="/admin/login_check">
-    <input placeholder="Login" type="text" name="_username"  />
-    <input placeholder="Hasło" type="password" name="_password"  />
-    <input type="submit" value="Zaloguj" />
-</form>
-LOGIN;
-
-    return $response;
+    return $app['twig']->render('login.twig', ['error' => $error]);
 });
 $app->get('/admin/produkty', function() use($app) {
-    return 'Lista produktów';
+    return $app['twig']->render('admin/productList.twig');
 }); 
 
 $app->run(); 

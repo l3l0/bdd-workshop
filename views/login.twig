@@ -1,0 +1,9 @@
+{% if error %}
+    <div class="error">Podałeś zły login lub hasło</div>
+{% endif %}
+
+<form method="POST" action="/admin/login_check">
+    <input placeholder="Login" type="text" name="_username"  />
+    <input placeholder="Hasło" type="password" name="_password"  />
+    <input type="submit" value="Zaloguj" />
+</form>
