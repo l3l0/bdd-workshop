@@ -12,8 +12,10 @@ class OwnerContext extends RawMinkContext
      */
     public function zeJestemZalogowanyJakoWlascicielStrony()
     {
+        $this->getSession()->visit($this->locatePath('/admin/produkty'));
         $this->getSession()->getPage()->fillField('Login', 'admin');
         $this->getSession()->getPage()->fillField('Hasło', 'foo');
+        $this->getSession()->getPage()->pressButton('Zaloguj');
     }
 
     /**
