@@ -4,6 +4,7 @@ namespace Context;
 
 use Behat\MinkExtension\Context\RawMinkContext;
 use Behat\Behat\Exception\PendingException;
+use Behat\Gherkin\Node\TableNode;
 
 class OwnerContext extends RawMinkContext
 {
@@ -73,5 +74,32 @@ class OwnerContext extends RawMinkContext
     public function powinenPojawicSieBlad($error)
     {
         $this->assertSession()->elementTextContains('css', '.error', $error);
+    }
+
+    /**
+     * @Given /^istnieją następujące produkty:$/
+     */
+    public function istniejaNastepujaceProdukty(TableNode $table)
+    {
+        $app = new \BddWorkshop\Application(['env' => 'test']);
+
+        $app['db']->delete('products', []);
+        $app['db']->insert('products', $table->getHash());
+    }
+
+    /**
+     * @Given /^kliklam w link "([^"]*)"$/
+     */
+    public function kliklamWLink($link)
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Given /^powinna pojawić się lista z produktem "([^"]*)" na czele$/
+     */
+    public function powinnaPojawicSieListaZProduktemNaCzele($nazwaProduktu)
+    {
+        throw new PendingException();
     }
 }

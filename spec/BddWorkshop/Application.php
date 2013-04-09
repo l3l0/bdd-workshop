@@ -31,6 +31,20 @@ class Application extends ObjectBehavior implements CustomMatchersProviderInterf
         $this['security.firewalls']->shouldHaveCount(1);
     }
 
+    function it_registers_sql_database_handler_for_test_database()
+    {
+        $this->beConstructedWith(['env' => 'test']);
+
+        $this['db.options']['driver']->shouldBe('pdo_sqlite');
+        $this['db.options']['path']->shouldBeStringLike('app_test.db');
+    }
+
+    function it_registers_sql_database_handler()
+    {
+        $this['db.options']['driver']->shouldBe('pdo_sqlite');
+        $this['db.options']['path']->shouldBeStringLike('app_dev.db');
+    }
+
     static public function getMatchers()
     {
         return [
