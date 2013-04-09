@@ -10,7 +10,9 @@
     "require-dev": {
         "behat/behat": "2.4.*",
         "behat/mink-extension": "*",
-        "behat/mink-goutte-driver": "*"
+        "behat/mink-goutte-driver": "*",
+        "phpspec/phpspec2": "dev-develop@dev",
+        "phpspec/php-diff": "*@dev"
     },  
     "config": {
         "bin-dir": "bin"
