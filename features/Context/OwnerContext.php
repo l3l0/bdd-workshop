@@ -49,7 +49,6 @@ class OwnerContext extends RawMinkContext
     public function klikamPrzycisk($label)
     {
         $this->getSession()->getPage()->pressButton($label);
-        
     }
 
     /**
