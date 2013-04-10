@@ -83,8 +83,13 @@ class OwnerContext extends RawMinkContext
     {
         $app = new \BddWorkshop\Application(['env' => 'test']);
 
-        $app['db']->delete('products', []);
-        $app['db']->insert('products', $table->getHash());
+        foreach ($table->getHash() as $row) {
+            $app['db']->delete('products', ['nazwa' => $row['nazwa']]);
+        }
+
+        foreach ($table->getHash() as $row) {
+            $app['db']->insert('products', $row);
+        }
     }
 
     /**
@@ -92,7 +97,7 @@ class OwnerContext extends RawMinkContext
      */
     public function kliklamWLink($link)
     {
-        throw new PendingException();
+        $this->getSession()->getPage()->clickLink($link);
     }
 
     /**
@@ -100,6 +105,20 @@ class OwnerContext extends RawMinkContext
      */
     public function powinnaPojawicSieListaZProduktemNaCzele($nazwaProduktu)
     {
-        throw new PendingException();
+        $elements = $this->getSession()->getPage()->findAll('css', 'table.items tbody tr');
+        if (!isset($elements[0])) {
+            throw new ElementNotFoundException($this->getSession(), sprintf('table.items tbody tr[%d]', 0));
+        }
+        $element = $elements[0]->find('css', 'td.name');
+        if (!$element) {
+            throw new ElementNotFoundException($this->getSession(), sprintf('table.items tbody tr[%d] td.%s', 0, $class));
+        }
+
+        $regex   = '/'.preg_quote($email, '/').'/ui';
+
+        if (!preg_match($regex, $element->getText())) {
+            $message = sprintf('The text "%s" was not found in the text of the element matching %s "%s".', $email, 'css', sprintf('table.items tbody tr[%d] td.%s', 0, $class));
+            throw new ElementTextException($message, $this->getSession(), $element);
+        }
     }
 }

@@ -11,4 +11,4 @@ default:
         Behat\MinkExtension\Extension:
             goutte: ~
             default_session: goutte
-            base_url: http://localhost:8000
+            base_url: http://localhost:8000/test.php

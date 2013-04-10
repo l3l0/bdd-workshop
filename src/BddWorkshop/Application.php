@@ -7,6 +7,7 @@ use Silex\Provider\TwigServiceProvider;
 use Silex\Provider\SecurityServiceProvider;
 use Silex\Provider\SessionServiceProvider;
 use Silex\Provider\DoctrineServiceProvider;
+use Symfony\Component\HttpFoundation\Request;
 
 class Application extends BaseApplication
 {
@@ -42,9 +43,21 @@ class Application extends BaseApplication
             [
                 'db.options' => [
                     'driver' => 'pdo_sqlite',
-                    'path' => sprintf('%s/app_%s.db', __DIR__.'/../../config/', $values['env'])
+                    'path' => sprintf('%s/app_%s.db', __DIR__.'/../../databases/', $values['env'])
                 ]
             ]
         );
+    }
+
+    public function registerRoutes()
+    {
+        $this->get('/login', function(Request $request) {
+            $error = $this['security.last_error']($request);
+        
+            return $this['twig']->render('login.twig', ['error' => $error]);
+        });
+        $this->get('/admin/produkty', function() {
+            return $this['twig']->render('admin/productList.twig');
+        }); 
     }
 }
