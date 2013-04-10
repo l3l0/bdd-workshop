@@ -14,8 +14,8 @@ class OwnerContext extends RawMinkContext
     public function zeJestemZalogowanyJakoWlascicielStrony()
     {
         $this->getSession()->visit($this->locatePath('/admin/produkty'));
-        $this->getSession()->getPage()->fillField('Login', 'admin');
-        $this->getSession()->getPage()->fillField('Hasło', 'foo');
+        $this->getSession()->getPage()->fillField('Login', 'Admin');
+        $this->getSession()->getPage()->fillField('Hasło', 'Foo');
         $this->getSession()->getPage()->pressButton('Zaloguj');
     }
 
@@ -120,5 +120,13 @@ class OwnerContext extends RawMinkContext
             $message = sprintf('The text "%s" was not found in the text of the element matching %s "%s".', $email, 'css', sprintf('table.items tbody tr[%d] td.%s', 0, $class));
             throw new ElementTextException($message, $this->getSession(), $element);
         }
+    }
+
+    /**
+     * @Given /^produkt "([^"]*)" powinnen być widoczny$/
+     */
+    public function produktPowinnenBycWidoczny($name)
+    {
+        $this->assertSession()->pageTextContains($name);
     }
 }

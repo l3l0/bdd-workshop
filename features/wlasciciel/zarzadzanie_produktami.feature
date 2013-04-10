@@ -1,6 +1,5 @@
 # language: pl
 
-@wip
 Właściwość: Jako właściciel strony
     chciałbym zarządzać produktami  
     które się na niej pojawiają
@@ -12,6 +11,12 @@ Założenia:
      | DTX450k | Elektroniczny zestaw perkusyjny Yamaha DTX450 to idealny zestaw na początek przygody z perkusją.     | 2399    |
      | DTX950k | Ten rewolucyjny, flagowy model perkusji elektronicznej jest wyposażony w pełen zestaw padów DTX-PAD. | 14499.5 |
 
+Scenariusz: Wyświetlanie listy produktów
+    Zakładając że jestem na stronie zarządzania produktami
+    Wtedy produkt "DTX450k" powinnen być widoczny
+    Oraz produkt "DTX950k" powinnen być widoczny
+
+@wip
 Scenariusz: Dodawanie nowego produktu
     Zakładając że jestem na stronie zarządzania produktami
     I kliklam w link "Dodaj Produkt"
@@ -23,5 +28,5 @@ Scenariusz: Dodawanie nowego produktu
 
 Scenariusz: Usuwanie istniejącego produktu
 Scenariusz: Wyświetlanie produktu
-Scenariusz: Wyświetlanie listy produktów
+
 Scenariusz: Edycja produkt

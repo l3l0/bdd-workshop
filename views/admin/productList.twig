@@ -1,1 +1,19 @@
 <h1>Lista Produktów</h1>
+<table class="items">
+<thead>
+    <tr>
+        <th>Nazwa</th>
+        <th>Opis</th>
+        <th>Cena</th>
+    </tr>
+</thead>
+{% for product in products %}
+<tbody>
+    <tr>
+        <td>{{ product.nazwa }}</td>
+        <td>{{ product.opis }}</td>
+        <td>{{ product.cena }}</td>
+    </tr>
+</tbody>
+{% endfor %}
+</table>

@@ -51,13 +51,7 @@ class Application extends BaseApplication
 
     public function registerRoutes()
     {
-        $this->get('/login', function(Request $request) {
-            $error = $this['security.last_error']($request);
-        
-            return $this['twig']->render('login.twig', ['error' => $error]);
-        });
-        $this->get('/admin/produkty', function() {
-            return $this['twig']->render('admin/productList.twig');
-        }); 
+        $this->get('/login', 'BddWorkshop\Controller\SecurityController::loginAction');
+        $this->get('/admin/produkty', 'BddWorkshop\Controller\Admin\ProductController::listAction');
     }
 }
