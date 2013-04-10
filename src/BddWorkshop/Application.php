@@ -6,11 +6,16 @@ use Silex\Application as BaseApplication;
 use Silex\Provider\TwigServiceProvider;
 use Silex\Provider\SecurityServiceProvider;
 use Silex\Provider\SessionServiceProvider;
+use Silex\Provider\DoctrineServiceProvider;
 
 class Application extends BaseApplication
 {
     public function __construct($values = [])
     {
+        if (!isset($values['env'])) {
+            $values['env'] = 'dev';
+        }
+
         parent::__construct($values);
 
         $this->register(new SessionServiceProvider);
@@ -30,6 +35,15 @@ class Application extends BaseApplication
                         ]
                     ]
                 ]             
+            ]
+        );
+        $this->register(
+            new DoctrineServiceProvider, 
+            [
+                'db.options' => [
+                    'driver' => 'pdo_sqlite',
+                    'path' => sprintf('%s/app_%s.db', __DIR__.'/../../config/', $values['env'])
+                ]
             ]
         );
     }
