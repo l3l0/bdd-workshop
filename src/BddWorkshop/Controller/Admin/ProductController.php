@@ -9,11 +9,7 @@ class ProductController
 {
     public function listAction(Request $request, Application $app)
     {
-        $products = [];
-        try {
-            $products = $app['db']->fetchAll('SELECT * FROM products');
-        } catch (\Exception $e) {
-        }
+        $products = $app['db']->fetchAll('SELECT * FROM products');
 
         return $app['twig']->render('admin/productList.twig', ['products' => $products]);
     }

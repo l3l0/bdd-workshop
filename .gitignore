@@ -1,5 +1,6 @@
 vendor/
 bin/
+databases/*
 .puppet
 composer.phar
 .vagrant
