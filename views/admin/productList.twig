@@ -10,9 +10,9 @@
 {% for product in products %}
 <tbody>
     <tr>
-        <td>{{ product.nazwa }}</td>
-        <td>{{ product.opis }}</td>
-        <td>{{ product.cena }}</td>
+        <td class="name">{{ product.nazwa }}</td>
+        <td class="desc">{{ product.opis }}</td>
+        <td class="price">{{ product.cena }}</td>
     </tr>
 </tbody>
 {% endfor %}

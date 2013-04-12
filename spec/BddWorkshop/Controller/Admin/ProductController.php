@@ -27,7 +27,7 @@ class ProductController extends ObjectBehavior
             ['id' => 2, 'nazwa' => 'DTX450k', 'opis' => 'jakis opis', 'cena' => 239.9]
         ];
 
-        $connection->fetchAll('SELECT * FROM products')->willReturn($products);
+        $connection->fetchAll(ANY_ARGUMENTS)->willReturn($products);
 
         $twig->render('admin/productList.twig', ['products' => $products])->shouldBeCalled()->willReturn($response);
 
@@ -42,6 +42,8 @@ class ProductController extends ObjectBehavior
      */
     function its_new_action_renders_new_product_template($request, $response, $application, $twig)
     {
+        $application->offsetGet('twig')->willReturn($twig);
+
         $request->isMethod('post')->willReturn(false);
         $twig->render('admin/productNew.twig')->shouldBeCalled()->willReturn($response);
 
@@ -57,13 +59,14 @@ class ProductController extends ObjectBehavior
      */
     function its_new_action_save_product_and_redirect_to_list_when_request_is_post_and_name_is_not_empty($request, $response, $application, $connection, $postParams)
     {
+        $application->offsetGet('db')->willReturn($connection);
         $request->isMethod('post')->willReturn(true);
         $request->request = $postParams;
         $postParams->get('name')->willReturn('Jakas nazwa');
-        $postParams->get('opis')->willReturn('Opis');
-        $postParams->get('cena')->willReturn('123.12');
+        $postParams->get('desc')->willReturn('Opis');
+        $postParams->get('price')->willReturn('123.12');
 
-        $connection->insert('product', ['name' => 'Jakas nazwa', 'opis' => 'Opis', 'cena' => '123.12'])->shouldBeCalled();
+        $connection->insert('products', ['nazwa' => 'Jakas nazwa', 'opis' => 'Opis', 'cena' => '123.12'])->shouldBeCalled();
         $application->redirect('/admin/produkty')->shouldBeCalled();
 
         $this->newAction($request, $application);

@@ -53,5 +53,7 @@ class Application extends BaseApplication
     {
         $this->get('/login', 'BddWorkshop\Controller\SecurityController::loginAction');
         $this->get('/admin/produkty', 'BddWorkshop\Controller\Admin\ProductController::listAction');
+        $this->get('/admin/produkty/nowy', 'BddWorkshop\Controller\Admin\ProductController::newAction');
+        $this->post('/admin/produkty/nowy', 'BddWorkshop\Controller\Admin\ProductController::newAction');
     }
 }

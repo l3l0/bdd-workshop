@@ -5,6 +5,7 @@ namespace Context;
 use Behat\MinkExtension\Context\RawMinkContext;
 use Behat\Behat\Exception\PendingException;
 use Behat\Gherkin\Node\TableNode;
+use Behat\Mink\Exception\ElementNotFoundException;
 
 class OwnerContext extends RawMinkContext
 {
@@ -111,13 +112,13 @@ class OwnerContext extends RawMinkContext
         }
         $element = $elements[0]->find('css', 'td.name');
         if (!$element) {
-            throw new ElementNotFoundException($this->getSession(), sprintf('table.items tbody tr[%d] td.%s', 0, $class));
+            throw new ElementNotFoundException($this->getSession(), sprintf('table.items tbody tr[%d] td.name', 0));
         }
 
-        $regex   = '/'.preg_quote($email, '/').'/ui';
+        $regex   = '/'.preg_quote($nazwaProduktu, '/').'/ui';
 
         if (!preg_match($regex, $element->getText())) {
-            $message = sprintf('The text "%s" was not found in the text of the element matching %s "%s".', $email, 'css', sprintf('table.items tbody tr[%d] td.%s', 0, $class));
+            $message = sprintf('The text "%s" was not found in the text of the element matching %s "%s".', $nazwaProduktu, 'css', sprintf('table.items tbody tr[%d] td.name', 0));
             throw new ElementTextException($message, $this->getSession(), $element);
         }
     }
